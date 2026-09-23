@@ -41,9 +41,6 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
           </div>
         ))}
       </div>
-      <div className="mt-auto flex justify-end border-t border-primary-foreground/15 pt-2">
-        <span className="h-1.5 w-14 shrink rounded-full bg-sage/60" />
-      </div>
     </div>
   );
 }
