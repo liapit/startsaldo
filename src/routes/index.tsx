@@ -31,18 +31,18 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
   return (
     <div className={`statement-card ${highlighted ? "statement-card-highlighted" : ""}`} aria-hidden="true">
       <div className="border-b border-primary-foreground/15 pb-2">
-        <span className="text-[9px] font-semibold uppercase tracking-[0.05em]">{title}</span>
+        <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.05em]">{title}</span>
       </div>
-      <div className="mt-2 space-y-1.5">
+      <div className="mt-2 space-y-2">
         {rows.map((row, index) => (
-          <div key={row} className="flex items-center justify-between gap-3">
-            <span className="text-[8px] text-primary-foreground/65">{row}</span>
-            <span className={`h-1 rounded-full bg-primary-foreground/25 ${index % 2 ? "w-8" : "w-11"}`} />
+          <div key={row} className="flex min-w-0 items-center justify-between gap-2">
+            <span className="whitespace-nowrap text-[8px] leading-none text-primary-foreground/65">{row}</span>
+            <span className={`h-1 w-11 shrink rounded-full bg-primary-foreground/25 ${index % 2 ? "max-w-8" : "max-w-11"}`} />
           </div>
         ))}
       </div>
       <div className="mt-auto flex justify-end border-t border-primary-foreground/15 pt-2">
-        <span className="h-1.5 w-14 rounded-full bg-sage/60" />
+        <span className="h-1.5 w-14 shrink rounded-full bg-sage/60" />
       </div>
     </div>
   );
