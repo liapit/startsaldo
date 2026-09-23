@@ -30,9 +30,8 @@ const statementCards = [
 function StatementCard({ title, rows, highlighted = false }: { title: string; rows: string[]; highlighted?: boolean }) {
   return (
     <div className={`statement-card ${highlighted ? "statement-card-highlighted" : ""}`} aria-hidden="true">
-      <div className="flex items-center justify-between gap-3 border-b border-primary-foreground/15 pb-2">
+      <div className="border-b border-primary-foreground/15 pb-2">
         <span className="text-[9px] font-semibold uppercase tracking-[0.05em]">{title}</span>
-        <span className="size-2 rounded-full bg-sage" />
       </div>
       <div className="mt-2 space-y-1.5">
         {rows.map((row, index) => (
