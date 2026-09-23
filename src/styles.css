@@ -253,10 +253,10 @@
 }
 
 @media (max-width: 767px) {
-  .statement-track { --statement-group: 35rem; }
+  .statement-track { --statement-group: 31rem; }
   .statement-card {
-    width: 8rem;
-    height: 8.5rem;
+    width: 7rem;
+    height: 7.5rem;
   }
 }
 

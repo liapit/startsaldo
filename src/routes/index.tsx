@@ -87,7 +87,7 @@ function Index() {
           <StatementMarquee reverse />
           <StatementMarquee />
         </div>
-        <div className="section-shell mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+        <div className="section-shell mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
         <div className="section-shell mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
       </section>
 
