@@ -12,12 +12,15 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
       return;
     }
     const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              setVisible(true);
+              io.disconnect();
+              break;
+            }
+          }
+        },
       { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
     );
     io.observe(el);
