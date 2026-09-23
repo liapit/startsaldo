@@ -93,8 +93,31 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const [testiScrolled, setTestiScrolled] = useState(false);
   const testiRef = useRef<HTMLDivElement>(null);
+
+  // Same edge fade as the hero statement marquee: cards fade purely via
+  // their own opacity near either edge — no mask, no colour veil.
+  useEffect(() => {
+    const rail = testiRef.current;
+    if (!rail) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cardEls = Array.from(rail.children) as HTMLElement[];
+    const fadeWidth = 310;
+    let raf = 0;
+    const tick = () => {
+      const railRect = rail.getBoundingClientRect();
+      cardEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
+        const t = Math.min(Math.max(d / fadeWidth, 0), 1);
+        const eased = t * t * (3 - 2 * t);
+        el.style.opacity = eased.toFixed(3);
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
   const nav = [["Dienstleistungen","#dienstleistungen"],["Über uns","#team"],["FAQ","#faq"],["Kontakt","#kontakt"]];
   const checks = (items: string[], light = false) => <ul className="mt-7 space-y-3.5">{items.map((item) => <li key={item} className="flex gap-3 text-[15px] leading-6"><Check className={`mt-1 size-4 shrink-0 ${light ? "text-sage" : "text-success"}`} />{item}</li>)}</ul>;
   return (
@@ -132,7 +155,7 @@ function Index() {
 
       <section id="team" className="section-pad"><div className="section-shell"><div className="text-center"><p className="eyebrow">Ihre Ansprechpartner</p><h2 className="heading-lg mt-4">Wer steht hinter den Zahlen?</h2><p className="mt-5 text-[18px] leading-7 text-muted-foreground">Ihre Buchhaltung wird persönlich von uns betreut. So wissen Sie jederzeit, an wen Sie sich wenden können.</p></div><div className="mt-14 grid gap-6 md:grid-cols-2">{[["Sarah Mogel","Lohn- und Finanzbuchhalterin","Sarah betreut die laufende Finanz- und Lohnbuchhaltung mit einem klaren Blick für saubere Abläufe. Verlässliche Termine und eine direkte Kommunikation stehen dabei im Mittelpunkt."],["Audelia Babbev-Pittet","Finanzbuchhalterin","Audelia kümmert sich um die strukturierte Führung und Abstimmung der Finanzbuchhaltung. Besonders wichtig ist ihr eine unkomplizierte und langfristige Zusammenarbeit."]].map(([name,role,bio],idx)=><Reveal key={name} delay={idx*120}><article className="overflow-hidden rounded-[24px] border border-border bg-card"><div className="grid aspect-[4/3] place-items-center bg-sage-soft"><div className="text-center"><UserRound className="mx-auto size-12 text-primary/50"/><p className="mt-3 text-sm font-medium text-muted-foreground">Portrait von {name}</p></div></div><div className="p-8"><h3 className="text-[28px] font-semibold">{name}</h3><p className="mt-1 font-semibold text-primary">{role}</p><p className="mt-5 leading-7 text-muted-foreground">{bio}</p></div></article></Reveal>)}</div></div></section>
 
-      <section className="section-pad bg-card"><div className="section-shell"><div className="text-center"><p className="eyebrow">Kundenfeedback</p><h2 className="heading-lg mt-4">Was unsere Kunden über die Zusammenarbeit sagen.</h2></div><Reveal className="mt-12"><div ref={testiRef} className="flex gap-5 overflow-x-auto overflow-y-hidden pb-5" onScroll={(e)=>setTestiScrolled(e.currentTarget.scrollLeft>4)} style={testiScrolled ? undefined : {WebkitMaskImage:"linear-gradient(to right, black calc(100% - 140px), transparent 100%)",maskImage:"linear-gradient(to right, black calc(100% - 140px), transparent 100%)"}}>{[1,2,3,4,5,6].map(x=><div key={x} className="min-w-[min(70vw,310px)]"><article className="h-full rounded-[20px] border border-border bg-background p-8"><p className="text-lg font-medium">Kundenstimme folgt</p><p className="mt-8 text-sm text-muted-foreground">Referenz wird nach Freigabe ergänzt.</p></article></div>)}</div></Reveal></div></section>
+      <section className="section-pad bg-card"><div className="section-shell"><div className="text-center"><p className="eyebrow">Kundenfeedback</p><h2 className="heading-lg mt-4">Was unsere Kunden über die Zusammenarbeit sagen.</h2></div><Reveal className="mt-12"><div ref={testiRef} className="flex gap-5 overflow-x-auto overflow-y-hidden pb-5">{[1,2,3,4,5,6].map(x=><div key={x} className="min-w-[min(70vw,310px)]"><article className="h-full rounded-[20px] border border-border bg-background p-8"><p className="text-lg font-medium">Kundenstimme folgt</p><p className="mt-8 text-sm text-muted-foreground">Referenz wird nach Freigabe ergänzt.</p></article></div>)}</div></Reveal></div></section>
 
       <section id="faq" className="section-pad"><div className="section-shell grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div className="text-center"><p className="eyebrow">FAQ</p><h2 className="heading-lg mt-4">Häufige Fragen.</h2><p className="mt-5 leading-7 text-muted-foreground">Hier finden Sie Antworten zu Umfang, Zusammenarbeit und Einstieg.</p></div><Accordion type="single" collapsible>{[["Wie sieht eine Zusammenarbeit aus?","1 Kennenlernen – Wir besprechen Ihr Unternehmen, Ihre aktuelle Situation und Ihren Bedarf.\n2 Zusammenarbeit definieren – Wir klären Aufgaben, Zuständigkeiten, Termine und Abläufe.\n3 Laufend betreuen – Wir übernehmen die vereinbarten Aufgaben zuverlässig und bleiben Ihre direkten Ansprechpartnerinnen."],["Wo werden meine Daten gespeichert?","Für den sicheren Austausch und die Speicherung von Dokumenten nutzen wir Proton. Die Daten werden Ende-zu-Ende verschlüsselt und auf Proton-Infrastruktur in der Schweiz bzw. Deutschland gespeichert."],["Muss ich meine gesamte Buchhaltung auslagern?","Nein. Sie können sowohl die gesamte Finanz- oder Lohnbuchhaltung als auch einzelne Aufgaben an uns übertragen. Gemeinsam definieren wir einen Umfang, der zu Ihrem Unternehmen und Ihren bestehenden Abläufen passt."],["Können Sie mit meinem bestehenden Treuhänder zusammenarbeiten?","Ja. Wir können die laufende Buchhaltung vorbereiten und mit Ihrem bestehenden Treuhänder oder Ihrer Revisionsstelle zusammenarbeiten. Die Zuständigkeiten stimmen wir zu Beginn klar miteinander ab."],["Arbeiten Sie vollständig digital?","Ja. Dokumente und Informationen können digital ausgetauscht werden. Dadurch bleiben die Abläufe effizient und Sie können unabhängig von Ihrem Standort mit uns zusammenarbeiten."],["Für welche Unternehmen arbeiten Sie?","Wir richten uns insbesondere an Schweizer KMU und junge Unternehmen, die ihre Finanz- und/oder Lohnbuchhaltung zuverlässig auslagern möchten."]].map(([q,a])=><AccordionItem key={q ?? "faq"} value={q ?? "faq"}><AccordionTrigger className="min-h-[72px] text-left text-base hover:no-underline">{q}</AccordionTrigger><AccordionContent className="max-w-[600px] pb-6 leading-7 text-muted-foreground whitespace-pre-line">{a}</AccordionContent></AccordionItem>)}</Accordion></div></section>
 
