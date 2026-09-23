@@ -49,11 +49,11 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
 }
 
 function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
-  const cards = [...statementCards, ...statementCards];
+  const cards = [...statementCards, ...statementCards, ...statementCards, ...statementCards];
   return (
     <div className="statement-rail">
       <div className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
-        {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index === 1 || index === 6} />)}
+        {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index % 4 === 1} />)}
       </div>
     </div>
   );
