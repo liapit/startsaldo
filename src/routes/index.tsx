@@ -93,8 +93,31 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const [testiScrolled, setTestiScrolled] = useState(false);
   const testiRef = useRef<HTMLDivElement>(null);
+
+  // Same edge fade as the hero statement marquee: cards fade purely via
+  // their own opacity near either edge — no mask, no colour veil.
+  useEffect(() => {
+    const rail = testiRef.current;
+    if (!rail) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cardEls = Array.from(rail.children) as HTMLElement[];
+    const fadeWidth = 140;
+    let raf = 0;
+    const tick = () => {
+      const railRect = rail.getBoundingClientRect();
+      cardEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
+        const t = Math.min(Math.max(d / fadeWidth, 0), 1);
+        const eased = t * t * (3 - 2 * t);
+        el.style.opacity = eased.toFixed(3);
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
   const nav = [["Dienstleistungen","#dienstleistungen"],["Über uns","#team"],["FAQ","#faq"],["Kontakt","#kontakt"]];
   const checks = (items: string[], light = false) => <ul className="mt-7 space-y-3.5">{items.map((item) => <li key={item} className="flex gap-3 text-[15px] leading-6"><Check className={`mt-1 size-4 shrink-0 ${light ? "text-sage" : "text-success"}`} />{item}</li>)}</ul>;
   return (
