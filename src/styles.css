@@ -216,7 +216,7 @@
 }
 
 @utility statement-track {
-  --statement-group: 39rem;
+  --statement-group: 33rem;
   display: flex;
   width: max-content;
   gap: 0.75rem;
@@ -232,8 +232,8 @@
 
 @utility statement-card {
   display: flex;
-  width: 9rem;
-  height: 9.5rem;
+  width: 7.5rem;
+  height: 8rem;
   flex-shrink: 0;
   flex-direction: column;
   opacity: 0.5;
