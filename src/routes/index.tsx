@@ -100,7 +100,7 @@ function Index() {
     if (!rail) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const cardEls = Array.from(rail.children) as HTMLElement[];
-    const fadeWidth = 310;
+    const fadeWidth = 400;
     let raf = 0;
     const tick = () => {
       const railRect = rail.getBoundingClientRect();
