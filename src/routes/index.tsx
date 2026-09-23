@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Cloud, Menu, UserRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -50,9 +50,39 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
 
 function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
   const cards = Array.from({ length: 12 }).flatMap(() => statementCards);
+  const railRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  // Fade cards in/out via their own opacity near the rail edges — no mask,
+  // no gradient overlay. Cards keep their look and simply become transparent.
+  useEffect(() => {
+    const rail = railRef.current;
+    const track = trackRef.current;
+    if (!rail || !track) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cardEls = Array.from(track.children) as HTMLElement[];
+    const fadeWidth = 170;
+    let raf = 0;
+    const tick = () => {
+      const railRect = rail.getBoundingClientRect();
+      const rects = cardEls.map((el) => el.getBoundingClientRect());
+      cardEls.forEach((el, i) => {
+        const rect = rects[i]!;
+        const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
+        const t = Math.min(Math.max(d / fadeWidth, 0), 1);
+        const eased = t * t * (3 - 2 * t);
+        const base = el.classList.contains("statement-card-highlighted") ? 0.68 : 0.5;
+        el.style.opacity = (base * eased).toFixed(3);
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
-    <div className="statement-rail">
-      <div className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
+    <div className="statement-rail" ref={railRef}>
+      <div ref={trackRef} className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
         {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index % 4 === 1} />)}
       </div>
     </div>
