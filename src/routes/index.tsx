@@ -49,7 +49,7 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
 }
 
 function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
-  const cards = [...statementCards, ...statementCards, ...statementCards, ...statementCards];
+  const cards = Array.from({ length: 12 }).flatMap(() => statementCards);
   return (
     <div className="statement-rail">
       <div className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
