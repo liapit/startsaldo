@@ -35,9 +35,9 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
       </div>
       <div className="mt-2 space-y-1.5">
         {rows.map((row, index) => (
-          <div key={row} className="flex items-center justify-between gap-3">
-            <span className="text-[8px] text-primary-foreground/65">{row}</span>
-            <span className={`h-1 rounded-full bg-primary-foreground/25 ${index % 2 ? "w-8" : "w-11"}`} />
+          <div key={row} className="flex min-w-0 items-center justify-between gap-2">
+            <span className="whitespace-nowrap text-[8px] text-primary-foreground/65">{row}</span>
+            <span className={`h-1 w-11 shrink rounded-full bg-primary-foreground/25 ${index % 2 ? "max-w-8" : "max-w-11"}`} />
           </div>
         ))}
       </div>
