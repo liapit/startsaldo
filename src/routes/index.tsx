@@ -93,7 +93,7 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const nav = [["Dienstleistungen","#dienstleistungen"],["So arbeiten wir","#ablauf"],["Über uns","#team"],["FAQ","#faq"],["Kontakt","#kontakt"]];
+  const nav = [["Dienstleistungen","#dienstleistungen"],["Über uns","#team"],["FAQ","#faq"],["Kontakt","#kontakt"]];
   const checks = (items: string[], light = false) => <ul className="mt-7 space-y-3.5">{items.map((item) => <li key={item} className="flex gap-3 text-[15px] leading-6"><Check className={`mt-1 size-4 shrink-0 ${light ? "text-sage" : "text-success"}`} />{item}</li>)}</ul>;
   return (
     <main className="bg-background text-foreground">
