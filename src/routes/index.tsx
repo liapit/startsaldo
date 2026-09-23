@@ -70,23 +70,25 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="section-shell grid h-[78px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
           <a href="#top" className="text-xl font-semibold tracking-[-0.02em]">Start<span className="text-primary">Saldo</span></a>
-          <nav className="hidden justify-end gap-4 text-[13.5px] md:flex lg:justify-center lg:gap-7 lg:text-[14px]">{nav.map(([label, href]) => <a key={href} href={href} className="whitespace-nowrap font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
+          <nav className="hidden justify-center gap-4 text-[13.5px] md:flex lg:gap-7 lg:text-[14px]">{nav.map(([label, href]) => <a key={href} href={href} className="whitespace-nowrap font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
           <Button asChild className="hidden md:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
           <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} className="grid size-11 place-items-center rounded-button border border-border md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
         {menuOpen && <nav className="section-shell flex flex-col border-t border-border py-4 md:hidden">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3 text-base">{label}</a>)}</nav>}
       </header>
 
-      <section id="top" className="section-shell py-16 lg:py-20">
-        <p className="eyebrow flex items-center gap-2"><span className="size-2 rounded-full bg-sage"/>Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
-        <h1 className="heading-xl mt-6 max-w-[650px]">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
-        <p className="mt-7 max-w-[560px] text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
-        <div className="mt-10 flex flex-col gap-4" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
+      <section id="top" className="py-16 lg:py-20">
+        <div className="section-shell">
+          <p className="eyebrow mx-auto flex w-fit items-center gap-2"><span className="size-2 rounded-full bg-sage"/>Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
+          <h1 className="heading-xl mx-auto mt-6 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
+          <p className="mx-auto mt-7 max-w-[560px] text-center text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
+        </div>
+        <div className="mt-10 flex w-full flex-col gap-4" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
           <StatementMarquee reverse />
           <StatementMarquee />
         </div>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
-        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
+        <div className="section-shell mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+        <div className="section-shell mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
       </section>
 
       <section className="border-y border-border bg-card"><div className="section-shell grid min-h-[90px] items-center divide-y divide-border py-3 text-center text-sm font-semibold md:grid-cols-3 md:divide-x md:divide-y-0">{["Persönlich betreut","Strukturiert organisiert","Verlässlich ausgeführt"].map(x=><p key={x} className="py-4">{x}</p>)}</div></section>

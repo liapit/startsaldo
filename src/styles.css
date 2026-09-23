@@ -211,6 +211,8 @@
 @utility statement-rail {
   width: 100%;
   overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
 }
 
 @utility statement-track {
