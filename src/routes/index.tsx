@@ -69,8 +69,7 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
         const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
         const t = Math.min(Math.max(d / fadeWidth, 0), 1);
         const eased = t * t * (3 - 2 * t);
-        const base = el.classList.contains("statement-card-highlighted") ? 0.68 : 0.5;
-        el.style.opacity = (base * eased).toFixed(3);
+        el.style.opacity = eased.toFixed(3);
       });
       raf = requestAnimationFrame(tick);
     };
