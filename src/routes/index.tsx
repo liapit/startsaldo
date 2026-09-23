@@ -88,7 +88,6 @@ function Index() {
           <StatementMarquee />
         </div>
         <div className="section-shell mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
-        <div className="section-shell mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
       </section>
 
       <section className="border-y border-border bg-card"><div className="section-shell grid min-h-[90px] items-center divide-y divide-border py-3 text-center text-sm font-semibold md:grid-cols-3 md:divide-x md:divide-y-0">{["Persönlich betreut","Strukturiert organisiert","Verlässlich ausgeführt"].map(x=><p key={x} className="py-4">{x}</p>)}</div></section>
