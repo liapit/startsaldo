@@ -49,11 +49,11 @@ function StatementCard({ title, rows, highlighted = false }: { title: string; ro
 }
 
 function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
-  const cards = [...statementCards, ...statementCards];
+  const cards = [...statementCards, ...statementCards, ...statementCards, ...statementCards];
   return (
     <div className="statement-rail">
       <div className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
-        {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index === 1 || index === 6} />)}
+        {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index % 4 === 1} />)}
       </div>
     </div>
   );
@@ -77,22 +77,16 @@ function Index() {
         {menuOpen && <nav className="section-shell flex flex-col border-t border-border py-4 lg:hidden">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3 text-base">{label}</a>)}</nav>}
       </header>
 
-      <section id="top" className="section-shell grid min-h-[680px] items-center gap-12 py-16 lg:grid-cols-[1.12fr_.88fr] lg:gap-16 lg:py-20">
-        <div>
-          <p className="eyebrow flex items-center gap-2"><span className="size-2 rounded-full bg-sage"/>Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
-          <h1 className="heading-xl mt-6 max-w-[650px]">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
-          <p className="mt-7 max-w-[560px] text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
+      <section id="top" className="section-shell py-16 lg:py-20">
+        <p className="eyebrow flex items-center gap-2"><span className="size-2 rounded-full bg-sage"/>Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
+        <h1 className="heading-xl mt-6 max-w-[650px]">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
+        <p className="mt-7 max-w-[560px] text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
+        <div className="mt-10 flex flex-col gap-4" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
+          <StatementMarquee reverse />
+          <StatementMarquee />
         </div>
-        <div className="relative min-h-[500px] overflow-hidden rounded-[24px] border border-border bg-sage-soft">
-          <div className="absolute inset-0 grid place-items-center px-8 text-center"><div><div className="mx-auto mb-5 grid size-20 place-items-center rounded-full bg-sage"><UserRound className="size-9 text-primary"/></div><p className="font-semibold">Gemeinsames Foto von Elia & Lisa</p><p className="mt-2 text-sm text-muted-foreground">Originalaufnahme wird hier eingesetzt.</p></div></div>
-          <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-center gap-4 bg-deep/25 py-8" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
-            <StatementMarquee reverse />
-            <StatementMarquee />
-          </div>
-          <div className="absolute bottom-5 left-5 z-20 max-w-[240px] rounded-[18px] border border-card/50 bg-card/90 p-5 backdrop-blur-md"><p className="font-semibold">Direkte Betreuung</p><p className="mt-1 text-sm leading-5 text-muted-foreground">Ihre Buchhaltung wird persönlich von uns betreut.</p></div>
-        </div>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">{["Persönliche Ansprechpartner","Schweizer KMU Fokus","Klare Zusammenarbeit"].map(x=><span key={x} className="flex items-center gap-2"><Check className="size-4 text-success"/>{x}</span>)}</div>
       </section>
 
       <section className="border-y border-border bg-card"><div className="section-shell grid min-h-[90px] items-center divide-y divide-border py-3 text-center text-sm font-semibold md:grid-cols-3 md:divide-x md:divide-y-0">{["Persönlich betreut","Strukturiert organisiert","Verlässlich ausgeführt"].map(x=><p key={x} className="py-4">{x}</p>)}</div></section>
