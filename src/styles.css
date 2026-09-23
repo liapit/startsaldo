@@ -232,18 +232,20 @@
   height: 9.5rem;
   flex-shrink: 0;
   flex-direction: column;
+  opacity: 0.5;
   border: 1px solid color-mix(in oklab, var(--primary-foreground) 18%, transparent);
   border-radius: 0.75rem;
   background: var(--deep);
   padding: 0.75rem;
   color: var(--primary-foreground);
-  box-shadow: 0 10px 30px color-mix(in oklab, var(--deep) 16%, transparent);
+  box-shadow: 0 10px 30px color-mix(in oklab, var(--deep) 10%, transparent);
 }
 
 @utility statement-card-highlighted {
+  opacity: 0.68;
   border-color: color-mix(in oklab, var(--sage) 72%, transparent);
-  background: color-mix(in oklab, var(--primary) 78%, transparent);
-  box-shadow: 0 0 24px color-mix(in oklab, var(--sage) 22%, transparent);
+  background: var(--primary);
+  box-shadow: 0 0 24px color-mix(in oklab, var(--sage) 14%, transparent);
 }
 
 @media (max-width: 767px) {
