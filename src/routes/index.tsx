@@ -83,11 +83,11 @@ function Index() {
           <h1 className="heading-xl mx-auto mt-6 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
           <p className="mx-auto mt-7 max-w-[560px] text-center text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
         </div>
-        <div className="mt-10 flex w-full flex-col gap-4" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
+        <div className="section-shell mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+        <div className="mt-8 w-full" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
           <StatementMarquee reverse />
-          <StatementMarquee />
         </div>
-        <div className="section-shell mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+
       </section>
 
       <section className="border-y border-border bg-card"><div className="section-shell grid min-h-[90px] items-center divide-y divide-border py-3 text-center text-sm font-semibold md:grid-cols-3 md:divide-x md:divide-y-0">{["Persönlich betreut","Strukturiert organisiert","Verlässlich ausgeführt"].map(x=><p key={x} className="py-4">{x}</p>)}</div></section>
