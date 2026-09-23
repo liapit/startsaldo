@@ -109,9 +109,9 @@ function Index() {
 
       <section id="top" className="py-16 lg:py-20">
         <div className="section-shell">
-          <p className="eyebrow mx-auto flex w-fit items-center gap-2"><span className="size-2 rounded-full bg-sage"/>Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
+          <p className="eyebrow mx-auto flex w-fit items-center gap-2">Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
           <h1 className="heading-xl mx-auto mt-6 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
-          <p className="mx-auto mt-7 text-center text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich – damit Sie mehr Zeit für Ihr Unternehmen haben.</p>
+          <p className="mx-auto mt-7 text-center text-[18px] leading-[1.65] text-muted-foreground md:text-[19px]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich.</p>
         </div>
         <div className="section-shell mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"><Button asChild><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
         <div className="mt-8 w-full" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
