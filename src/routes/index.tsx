@@ -67,7 +67,7 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
       const railRect = rail.getBoundingClientRect();
       const rects = cardEls.map((el) => el.getBoundingClientRect());
       cardEls.forEach((el, i) => {
-        const rect = rects[i];
+        const rect = rects[i]!;
         const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
         const t = Math.min(Math.max(d / fadeWidth, 0), 1);
         const eased = t * t * (3 - 2 * t);
