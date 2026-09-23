@@ -68,13 +68,13 @@ function Index() {
   return (
     <main className="bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
-        <div className="section-shell grid h-[78px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:grid-cols-[auto_1fr_auto]">
+        <div className="section-shell grid h-[78px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_1fr_auto] lg:gap-4">
           <a href="#top" className="text-xl font-semibold tracking-[-0.02em]">Start<span className="text-primary">Saldo</span></a>
-          <nav className="hidden justify-center gap-7 lg:flex">{nav.map(([label, href]) => <a key={href} href={href} className="text-[14px] font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
-          <Button asChild className="hidden lg:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
-          <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} className="grid size-11 place-items-center rounded-button border border-border lg:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
+          <nav className="hidden justify-end gap-4 text-[13.5px] md:flex lg:justify-center lg:gap-7 lg:text-[14px]">{nav.map(([label, href]) => <a key={href} href={href} className="whitespace-nowrap font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
+          <Button asChild className="hidden md:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
+          <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} className="grid size-11 place-items-center rounded-button border border-border md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
-        {menuOpen && <nav className="section-shell flex flex-col border-t border-border py-4 lg:hidden">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3 text-base">{label}</a>)}</nav>}
+        {menuOpen && <nav className="section-shell flex flex-col border-t border-border py-4 md:hidden">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3 text-base">{label}</a>)}</nav>}
       </header>
 
       <section id="top" className="section-shell py-16 lg:py-20">
