@@ -197,3 +197,65 @@
   letter-spacing: -0.025em;
   @media (min-width: 768px) { font-size: 2.875rem; }
 }
+
+@keyframes statement-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.375rem)); }
+}
+
+@keyframes statement-marquee-right {
+  from { transform: translateX(calc(-50% - 0.375rem)); }
+  to { transform: translateX(0); }
+}
+
+@utility statement-rail {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+@utility statement-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: statement-marquee-left 34s linear infinite;
+  will-change: transform;
+}
+
+@utility statement-track-reverse {
+  animation-name: statement-marquee-right;
+  animation-duration: 38s;
+}
+
+@utility statement-card {
+  display: flex;
+  width: 9rem;
+  height: 9.5rem;
+  flex-shrink: 0;
+  flex-direction: column;
+  border: 1px solid color-mix(in oklab, var(--primary-foreground) 18%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in oklab, var(--deep) 68%, transparent);
+  padding: 0.75rem;
+  color: var(--primary-foreground);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: 0 10px 30px color-mix(in oklab, var(--deep) 16%, transparent);
+}
+
+@utility statement-card-highlighted {
+  border-color: color-mix(in oklab, var(--sage) 72%, transparent);
+  background: color-mix(in oklab, var(--primary) 78%, transparent);
+  box-shadow: 0 0 24px color-mix(in oklab, var(--sage) 22%, transparent);
+}
+
+@media (max-width: 767px) {
+  .statement-card {
+    width: 8rem;
+    height: 8.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .statement-track { animation-play-state: paused; }
+}

@@ -19,6 +19,46 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const statementCards = [
+  { title: "Bilanz", rows: ["Aktiven", "Umlaufvermögen", "Anlagevermögen", "Passiven"] },
+  { title: "Erfolgsrechnung", rows: ["Betriebsertrag", "Personalaufwand", "Betriebsaufwand", "Ergebnis"] },
+  { title: "Bilanz", rows: ["Flüssige Mittel", "Forderungen", "Eigenkapital", "Verbindlichkeiten"] },
+  { title: "Erfolgsrechnung", rows: ["Nettoerlös", "Warenaufwand", "Betriebserfolg", "Jahresergebnis"] },
+];
+
+function StatementCard({ title, rows, highlighted = false }: { title: string; rows: string[]; highlighted?: boolean }) {
+  return (
+    <div className={`statement-card ${highlighted ? "statement-card-highlighted" : ""}`} aria-hidden="true">
+      <div className="flex items-center justify-between gap-3 border-b border-primary-foreground/15 pb-2">
+        <span className="text-[9px] font-semibold uppercase tracking-[0.05em]">{title}</span>
+        <span className="size-2 rounded-full bg-sage" />
+      </div>
+      <div className="mt-2 space-y-1.5">
+        {rows.map((row, index) => (
+          <div key={row} className="flex items-center justify-between gap-3">
+            <span className="text-[8px] text-primary-foreground/65">{row}</span>
+            <span className={`h-1 rounded-full bg-primary-foreground/25 ${index % 2 ? "w-8" : "w-11"}`} />
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto flex justify-end border-t border-primary-foreground/15 pt-2">
+        <span className="h-1.5 w-14 rounded-full bg-sage/60" />
+      </div>
+    </div>
+  );
+}
+
+function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
+  const cards = [...statementCards, ...statementCards];
+  return (
+    <div className="statement-rail">
+      <div className={reverse ? "statement-track statement-track-reverse" : "statement-track"}>
+        {cards.map((card, index) => <StatementCard key={`${card.title}-${index}`} {...card} highlighted={index === 1 || index === 6} />)}
+      </div>
+    </div>
+  );
+}
+
 // IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,7 +87,11 @@ function Index() {
         </div>
         <div className="relative min-h-[500px] overflow-hidden rounded-[24px] border border-border bg-sage-soft">
           <div className="absolute inset-0 grid place-items-center px-8 text-center"><div><div className="mx-auto mb-5 grid size-20 place-items-center rounded-full bg-sage"><UserRound className="size-9 text-primary"/></div><p className="font-semibold">Gemeinsames Foto von Elia & Lisa</p><p className="mt-2 text-sm text-muted-foreground">Originalaufnahme wird hier eingesetzt.</p></div></div>
-          <div className="absolute bottom-5 left-5 max-w-[240px] rounded-[18px] border border-border bg-card p-5"><p className="font-semibold">Direkte Betreuung</p><p className="mt-1 text-sm leading-5 text-muted-foreground">Ihre Buchhaltung wird persönlich von uns betreut.</p></div>
+          <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-center gap-4 bg-deep/25 py-8" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
+            <StatementMarquee reverse />
+            <StatementMarquee />
+          </div>
+          <div className="absolute bottom-5 left-5 z-20 max-w-[240px] rounded-[18px] border border-card/50 bg-card/90 p-5 backdrop-blur-md"><p className="font-semibold">Direkte Betreuung</p><p className="mt-1 text-sm leading-5 text-muted-foreground">Ihre Buchhaltung wird persönlich von uns betreut.</p></div>
         </div>
       </section>
 
