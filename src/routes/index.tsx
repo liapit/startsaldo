@@ -4,7 +4,6 @@ import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Cloud, Menu, UserRound
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import ssLogo from "@/assets/ss-logo.png";
 
 // No head() here: the home route inherits title/description/og/twitter from
 // __root.tsx, and ships no og:image so serve-time hosting can inject the
@@ -115,7 +114,7 @@ function Index() {
     <main className="bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="section-shell grid h-[78px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
-          <a href="#top" className="flex items-center gap-2.5 text-xl font-semibold tracking-[-0.02em]"><img src={ssLogo} alt="SS-Logo von StartSaldo" className="h-7 w-auto" loading="eager" />Start<span className="text-primary">Saldo</span></a>
+          <a href="#top" className="text-xl font-semibold tracking-[-0.02em]">Start<span className="text-primary">Saldo</span></a>
           <nav className="hidden justify-center gap-4 text-[13.5px] md:flex lg:gap-7 lg:text-[14px]">{nav.map(([label, href]) => <a key={href} href={href} className="whitespace-nowrap font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
           <Button asChild className="hidden md:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
           <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} className="grid size-11 place-items-center rounded-button border border-border md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
