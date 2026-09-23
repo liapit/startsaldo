@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Cloud, Menu, UserRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import audeliaPhoto from "@/assets/audelia.jpg.asset.json";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // No head() here: the home route inherits title/description/og/twitter from
