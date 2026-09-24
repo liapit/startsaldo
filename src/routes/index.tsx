@@ -69,7 +69,7 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
         const d = Math.min(rect.right - railRect.left, railRect.right - rect.left);
         const t = Math.min(Math.max(d / fadeWidth, 0), 1);
         const eased = t * t * (3 - 2 * t);
-        el.style.opacity = eased.toFixed(3);
+        el.style.opacity = (eased * 0.75).toFixed(3);
       });
       raf = requestAnimationFrame(tick);
     };
