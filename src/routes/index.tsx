@@ -177,7 +177,9 @@ function Index() {
           <Button asChild className="hidden md:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
           <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} aria-expanded={menuOpen} className="grid size-10 shrink-0 place-items-center rounded-button border border-border bg-background text-foreground md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X className="size-5"/> : <Menu className="size-5"/>}</button>
         </div>
-        {menuOpen && <nav className="section-shell flex flex-col border-t border-border py-2 md:hidden">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="border-b border-border/70 py-3.5 text-base font-medium last:border-0">{label}</a>)}</nav>}
+        <div className={`absolute inset-x-0 top-full z-40 border-b border-border bg-background shadow-[0_24px_40px_-20px_rgba(23,32,28,0.25)] transition-all duration-300 ease-out md:hidden ${menuOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-3 opacity-0"}`} aria-hidden={!menuOpen}>
+          <nav className="section-shell flex flex-col py-2">{nav.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="border-b border-border/70 py-3.5 text-base font-medium last:border-0">{label}</a>)}</nav>
+        </div>
       </header>
 
       <section id="top" className="overflow-hidden pb-14 pt-12 sm:py-16 lg:py-20">
