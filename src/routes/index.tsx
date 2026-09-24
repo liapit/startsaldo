@@ -90,6 +90,40 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (sending) return;
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    setSending(true);
+    setSendError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          firma: fd.get("firma"),
+          email: fd.get("email"),
+          telefon: fd.get("telefon"),
+          nachricht: fd.get("nachricht"),
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "Die Nachricht konnte nicht gesendet werden.");
+      }
+      form.reset();
+      setSent(true);
+    } catch (err) {
+      setSendError(err instanceof Error ? err.message : "Die Nachricht konnte nicht gesendet werden.");
+    } finally {
+      setSending(false);
+    }
+  }
   const testiRef = useRef<HTMLDivElement>(null);
 
   // Same edge fade as the hero statement marquee: cards fade purely via
