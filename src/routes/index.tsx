@@ -90,6 +90,40 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (sending) return;
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    setSending(true);
+    setSendError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          firma: fd.get("firma"),
+          email: fd.get("email"),
+          telefon: fd.get("telefon"),
+          nachricht: fd.get("nachricht"),
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "Die Nachricht konnte nicht gesendet werden.");
+      }
+      form.reset();
+      setSent(true);
+    } catch (err) {
+      setSendError(err instanceof Error ? err.message : "Die Nachricht konnte nicht gesendet werden.");
+    } finally {
+      setSending(false);
+    }
+  }
   const testiRef = useRef<HTMLDivElement>(null);
 
   // Same edge fade as the hero statement marquee: cards fade purely via
@@ -181,7 +215,7 @@ function Index() {
             <Button variant="outline" className="mt-8" onClick={() => setSent(false)}>Neue Nachricht schreiben</Button>
           </div>
         ) : (
-        <form className="rounded-[24px] border border-border bg-background p-6 md:p-10" onSubmit={(e)=>{e.preventDefault(); setSent(true)}}><div className="grid gap-5 sm:grid-cols-2">{["Name","Firma","E-Mail","Telefon"].map((label,i)=><label key={label} className="text-sm font-medium">{label}<input required={i===0||i===2} type={i===2?"email":i===3?"tel":"text"} className="mt-2 h-[52px] w-full rounded-[10px] border border-input bg-card px-4 outline-none transition-colors focus:border-primary"/></label>)}</div><label className="mt-6 block text-sm font-medium">Nachricht<textarea className="mt-2 min-h-[140px] w-full resize-y rounded-[10px] border border-input bg-card p-4 outline-none transition-colors focus:border-primary"/></label><Button type="submit" className="mt-6 w-full">Anfrage senden</Button><p className="mt-4 text-center text-xs leading-5 text-muted-foreground">Mit dem Absenden stimmen Sie der Bearbeitung Ihrer Angaben zur Kontaktaufnahme zu.</p></form>
+        <form className="rounded-[24px] border border-border bg-background p-6 md:p-10" onSubmit={handleContactSubmit}><div className="grid gap-5 sm:grid-cols-2">{[["Name","name"],["Firma","firma"],["E-Mail","email"],["Telefon","telefon"]].map(([label,field],i)=><label key={label} className="text-sm font-medium">{label}<input name={field} required={i===0||i===2} type={i===2?"email":i===3?"tel":"text"} className="mt-2 h-[52px] w-full rounded-[10px] border border-input bg-card px-4 outline-none transition-colors focus:border-primary"/></label>)}</div><label className="mt-6 block text-sm font-medium">Nachricht<textarea name="nachricht" required className="mt-2 min-h-[140px] w-full resize-y rounded-[10px] border border-input bg-card p-4 outline-none transition-colors focus:border-primary"/></label>{sendError && <p role="alert" className="mt-4 text-center text-sm font-medium text-destructive">{sendError}</p>}<Button type="submit" disabled={sending} className="mt-6 w-full">{sending ? "Wird gesendet…" : "Anfrage senden"}</Button><p className="mt-4 text-center text-xs leading-5 text-muted-foreground">Mit dem Absenden stimmen Sie der Bearbeitung Ihrer Angaben zur Kontaktaufnahme zu.</p></form>
         )}</div></section>
 
       <footer className="bg-foreground py-12 text-primary-foreground"><div className="section-shell"><div className="grid gap-10 md:grid-cols-3"><div><p className="text-xl font-semibold">StartSaldo</p><p className="mt-3 text-sm leading-6 text-primary-foreground/65">Finanz- & Lohnbuchhaltung für Schweizer KMU.</p></div><nav className="flex flex-col items-start gap-3 text-sm md:mx-auto md:w-fit">{nav.slice(0,4).map(([l,h])=><a key={h} href={h}>{l}</a>)}</nav><div className="text-sm leading-7 md:justify-self-end"><a href="mailto:info@startsaldo.ch">info@startsaldo.ch</a><br/><a href="tel:+41798989982">079 898 99 82</a><br/>Einsiedeln SZ</div></div><div className="mt-10 flex flex-row items-center justify-between gap-4 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/60"><p>© 2026 StartSaldo</p><div className="flex gap-5"><a href="#" onClick={(e)=>e.preventDefault()}>Impressum</a><a href="#" onClick={(e)=>e.preventDefault()}>Datenschutz</a></div></div></div></footer>
