@@ -162,14 +162,14 @@
 }
 
 @utility section-shell {
-  width: min(100% - 40px, 1200px);
+  width: min(100% - 32px, 1200px);
   margin-inline: auto;
   @media (min-width: 768px) { width: min(100% - 56px, 1200px); }
   @media (min-width: 1024px) { width: min(100% - 64px, 1200px); }
 }
 
 @utility section-pad {
-  padding-block: 4.5rem;
+  padding-block: 3.75rem;
   @media (min-width: 768px) { padding-block: 7rem; }
 }
 
@@ -183,19 +183,23 @@
 }
 
 @utility heading-xl {
-  font-size: 2.625rem;
-  line-height: 1.06;
+  font-size: 2.25rem;
+  line-height: 1.08;
   font-weight: 600;
-  letter-spacing: -0.035em;
-  @media (min-width: 768px) { font-size: 4rem; }
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  @media (min-width: 480px) { font-size: 2.625rem; }
+  @media (min-width: 768px) { font-size: 4rem; letter-spacing: -0.035em; }
 }
 
 @utility heading-lg {
-  font-size: 2.125rem;
-  line-height: 1.12;
+  font-size: 1.875rem;
+  line-height: 1.16;
   font-weight: 600;
-  letter-spacing: -0.025em;
-  @media (min-width: 768px) { font-size: 2.875rem; }
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  @media (min-width: 480px) { font-size: 2.125rem; }
+  @media (min-width: 768px) { font-size: 2.875rem; letter-spacing: -0.025em; }
 }
 
 @keyframes statement-marquee-left {
