@@ -4,6 +4,7 @@ import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Cloud, Menu, UserRound
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import audeliaPhotoUrl from "@/assets/audelia.jpg";
+import startsaldoLogoAsset from "@/assets/startsaldo-logo.png.asset.json";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // No head() here: the home route inherits title/description/og/twitter from
@@ -172,7 +173,9 @@ function Index() {
     <main className="bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="section-shell grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:h-[78px] md:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
-          <a href="#top" className="min-w-0 truncate text-xl font-semibold tracking-[-0.02em]">Start<span className="text-primary">Saldo</span></a>
+          <a href="#top" className="block min-w-0" aria-label="StartSaldo – zum Seitenanfang">
+            <img src={startsaldoLogoAsset.url} alt="StartSaldo" className="h-auto w-[132px] sm:w-[148px]" />
+          </a>
           <nav className="hidden justify-center gap-4 text-[13.5px] md:flex lg:gap-7 lg:text-[14px]">{nav.map(([label, href]) => <a key={href} href={href} className="whitespace-nowrap font-medium text-muted-foreground transition-colors hover:text-primary">{label}</a>)}</nav>
           <Button asChild className="hidden md:inline-flex"><a href="#kontakt">Erstgespräch</a></Button>
           <button aria-label={menuOpen ? "Menü schliessen" : "Menü öffnen"} aria-expanded={menuOpen} className="grid size-10 shrink-0 place-items-center rounded-button border border-border bg-background text-foreground md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X className="size-5"/> : <Menu className="size-5"/>}</button>
