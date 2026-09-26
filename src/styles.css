@@ -237,6 +237,7 @@
   width: 7.5rem;
   height: 8rem;
   flex-shrink: 0;
+  opacity: 0.75;
   flex-direction: column;
   border: 1px solid color-mix(in oklab, var(--primary-foreground) 18%, transparent);
   border-radius: 0.75rem;
