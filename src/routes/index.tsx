@@ -89,6 +89,7 @@ function StatementMarquee({ reverse = false }: { reverse?: boolean }) {
 // IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(false);
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
@@ -125,6 +126,15 @@ function Index() {
     }
   }
   const testiRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setHeroVisible(true);
+      return;
+    }
+    const timer = window.setTimeout(() => setHeroVisible(true), 100);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   // Same edge fade as the hero statement marquee: cards fade purely via
   // their own opacity near either edge — no mask, no colour veil.
@@ -182,7 +192,15 @@ function Index() {
         </div>
       </header>
 
-      <section id="top" className="animate-[fade-in_0.7s_ease-out_both] overflow-hidden pb-14 pt-12 motion-reduce:animate-none sm:py-16 lg:py-20">
+      <section
+        id="top"
+        className="overflow-hidden pb-14 pt-12 sm:py-16 lg:py-20"
+        style={{
+          opacity: heroVisible ? 1 : 0,
+          transform: heroVisible ? "none" : "translateY(14px)",
+          transition: "opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
         <div className="section-shell">
           <p className="eyebrow mx-auto max-w-[320px] text-center">Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
           <h1 className="heading-xl mx-auto mt-5 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
