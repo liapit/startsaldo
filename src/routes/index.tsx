@@ -184,15 +184,15 @@ function Index() {
 
       <section
         id="top"
-        className="hero-enter overflow-hidden pb-14 pt-12 sm:py-16 lg:py-20"
+        className="overflow-hidden pb-14 pt-12 sm:py-16 lg:py-20"
       >
         <div className="section-shell">
-          <p className="eyebrow mx-auto max-w-[320px] text-center">Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
-          <h1 className="heading-xl mx-auto mt-5 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
-          <p className="mx-auto mt-6 max-w-[350px] text-center text-base leading-7 text-muted-foreground md:max-w-none md:text-[19px] md:leading-[1.65]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich.</p>
+          <p className="hero-reveal hero-reveal-1 eyebrow mx-auto max-w-[320px] text-center">Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
+          <h1 className="hero-reveal hero-reveal-2 heading-xl mx-auto mt-5 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
+          <p className="hero-reveal hero-reveal-3 mx-auto mt-6 max-w-[350px] text-center text-base leading-7 text-muted-foreground md:max-w-none md:text-[19px] md:leading-[1.65]">Wir übernehmen Ihre Finanz- und Lohnbuchhaltung zuverlässig und persönlich.</p>
         </div>
-        <div className="section-shell mt-8 grid gap-3 sm:flex sm:items-center sm:justify-center"><Button asChild className="w-full sm:w-auto"><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild className="w-full sm:w-auto"><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
-        <div className="mt-7 w-full" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
+        <div className="hero-reveal hero-reveal-4 section-shell mt-8 grid gap-3 sm:flex sm:items-center sm:justify-center"><Button asChild className="w-full sm:w-auto"><a href="#kontakt">Unverbindliches Erstgespräch</a></Button><Button variant="outline" asChild className="w-full sm:w-auto"><a href="#dienstleistungen">Dienstleistungen ansehen</a></Button></div>
+        <div className="hero-reveal hero-reveal-5 mt-7 w-full" aria-label="Abstrakte Bilanz- und Erfolgsrechnungen in Bewegung">
           <StatementMarquee reverse />
         </div>
 
