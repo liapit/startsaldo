@@ -182,7 +182,10 @@ function Index() {
         </div>
       </header>
 
-      <section id="top" className="animate-[fade-in_0.7s_ease-out_both] overflow-hidden pb-14 pt-12 motion-reduce:animate-none sm:py-16 lg:py-20">
+      <section
+        id="top"
+        className="hero-enter overflow-hidden pb-14 pt-12 sm:py-16 lg:py-20"
+      >
         <div className="section-shell">
           <p className="eyebrow mx-auto max-w-[320px] text-center">Finanz- & Lohnbuchhaltung für Schweizer KMU</p>
           <h1 className="heading-xl mx-auto mt-5 max-w-[650px] text-center">Ihre Buchhaltung.<br/><span className="text-primary">Persönlich erledigt.</span></h1>
