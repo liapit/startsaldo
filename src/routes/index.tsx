@@ -132,8 +132,8 @@ function Index() {
       setHeroVisible(true);
       return;
     }
-    const timer = window.setTimeout(() => setHeroVisible(true), 100);
-    return () => window.clearTimeout(timer);
+    const frame = window.requestAnimationFrame(() => setHeroVisible(true));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Same edge fade as the hero statement marquee: cards fade purely via
